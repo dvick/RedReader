@@ -35,10 +35,15 @@ import java.util.UUID;
 public final class RedditVideosAPI {
 
 	private static final String[] PREFERRED_VIDEO_FORMATS = {
+			"DASH_480",
 			"DASH_2_4_M", // 480p
+			"DASH_360",
 			"DASH_1_2_M", // 360p
+			"DASH_720",
 			"DASH_4_8_M", // 720p
+			"DASH_240",
 			"DASH_600_K", // 240p
+			"DASH_1080",
 			"DASH_9_6_M"  // 1080p
 	};
 
@@ -113,15 +118,15 @@ public final class RedditVideosAPI {
 
 						if(videoUrl == null) {
 							// Fallback
-							videoUrl = "https://v.redd.it/" + imageId + "/DASH_600_K";
+							videoUrl = "https://v.redd.it/" + imageId + "/DASH_480";
 						}
 
 						final ImageInfo result;
 
 						if(audioUrl != null) {
-							result = new ImageInfo(videoUrl, audioUrl, ImageInfo.MediaType.VIDEO);
+							result = new ImageInfo(videoUrl, audioUrl, ImageInfo.MediaType.VIDEO, ImageInfo.HasAudio.HAS_AUDIO);
 						} else {
-							result = new ImageInfo(videoUrl, ImageInfo.MediaType.VIDEO);
+							result = new ImageInfo(videoUrl, ImageInfo.MediaType.VIDEO, ImageInfo.HasAudio.NO_AUDIO);
 						}
 
 						Log.i("RedditVideosAPI", String.format(
